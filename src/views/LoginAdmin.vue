@@ -1,29 +1,64 @@
 <template>
   <div class="login-container">
-    <el-form :model="form" class="login-form">
+    <el-form :model="form" ref="ruleFormRef" :rules="rules" class="login-form">
       <div class="title-container">
         <h3 class="title">用户登录</h3>
       </div>
-      <el-form-item>
-        <el-icon :size="20" class="svg-container"> <edit /> </el-icon>
-        <el-input v-model="form.name" />
+      <el-form-item prop="userName">
+        <el-icon :size="20" class="svg-container">
+          <user />
+        </el-icon>
+        <el-input v-model="form.userName" />
       </el-form-item>
-      <el-form-item>
-        <el-icon :size="20" class="svg-container"> <edit /> </el-icon>
+      <el-form-item prop="password">
+        <el-icon :size="20" class="svg-container">
+          <edit />
+        </el-icon>
         <el-input v-model="form.password" />
       </el-form-item>
-      <el-button type="primary" class="login-button">登录</el-button>
+      <el-button type="primary" class="login-button" @click="handleLogin"
+        >登录</el-button
+      >
     </el-form>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import { Edit } from '@element-plus/icons-vue'
+import { ref, reactive } from 'vue'
+import { Edit, User } from '@element-plus/icons-vue'
 const form = ref({
-  name: '',
+  userName: '',
   password: ''
 })
+
+const rules = reactive({
+  userName: [
+    {
+      required: true,
+      message: 'Please input Activity nuserNameame',
+      trigger: 'blur'
+    }
+  ],
+  password: [
+    {
+      required: true,
+      message: 'Please select password',
+      trigger: 'change'
+    }
+  ]
+})
+
+const ruleFormRef = ref(null)
+const handleLogin = () => {
+  ruleFormRef.value.validate((valid) => {
+    if (valid) {
+      alert('submit!')
+    } else {
+      console.log('error submit!!')
+      return false
+    }
+  })
+}
 </script>
 
 <style lang="scss" scoped>
@@ -54,7 +89,7 @@ $cursor: #fff;
     }
 
     :deep(.el-input) {
-      display: inline-block;
+      // display: inline-block;
       height: 47px;
       width: 85%;
 
@@ -93,7 +128,7 @@ $cursor: #fff;
     padding: 6px 5px 6px 15px;
     color: $dark_gray;
     vertical-align: middle;
-    display: inline-block;
+    // display: inline-block;
   }
 
   .title-container {
