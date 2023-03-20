@@ -1,13 +1,5 @@
 <template>
-  <!-- <el-row class="mb-4">
-    <el-button>Default</el-button>
-    {{ sum }}
-    <el-button type="primary" @click="sum++">Primary</el-button>
-    <el-button type="success">Success</el-button>
-    <el-button type="info" @click="sum--">Info</el-button>
-    <el-button type="warning">Warning</el-button>
-    <el-button type="danger">Danger</el-button>
-  </el-row> -->
+
   <router-view />
 </template>
 
@@ -41,6 +33,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  /* margin-top: 60px; */
 }
 </style>

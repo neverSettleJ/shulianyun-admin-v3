@@ -4,11 +4,11 @@
       <div class="title-container">
         <h3 class="title">用户登录</h3>
       </div>
-      <el-form-item prop="userName">
+      <el-form-item prop="account">
         <el-icon :size="20" class="svg-container">
           <user />
         </el-icon>
-        <el-input v-model="form.userName" />
+        <el-input v-model="form.account" />
       </el-form-item>
       <el-form-item prop="password">
         <el-icon :size="20" class="svg-container">
@@ -16,52 +16,82 @@
         </el-icon>
         <el-input v-model="form.password" />
       </el-form-item>
-      <el-button type="primary" class="login-button" @click="handleLogin"
-        >登录</el-button
-      >
+      <el-button type="primary" class="login-button" @click="handleLogin">登录</el-button>
     </el-form>
   </div>
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
 import { Edit, User } from '@element-plus/icons-vue'
+import loginService from '@/api/login'
+import md5 from 'blueimp-md5'
+import { sha256 } from 'js-sha256'
+import VueCookies from 'vue-cookies'
+
 const form = ref({
-  userName: '',
+  account: '',
   password: ''
 })
 
 const rules = reactive({
-  userName: [
+  account: [
     {
       required: true,
-      message: 'Please input Activity nuserNameame',
+      message: '请输入用户名',
       trigger: 'blur'
     }
   ],
   password: [
     {
       required: true,
-      message: 'Please select password',
+      message: '请输入密码',
       trigger: 'change'
     }
   ]
 })
-
+let cookieAccount = VueCookies.get('account')
+// console.log(VueCookies, 22232)
+// if (cookieAccount) {
+//   var account = cookieAccount
+// }
 const ruleFormRef = ref(null)
+let pwdMd5 = md5(form.value.password)
+let random = new Date().getTime()
+let sign = sha256(form.value.account + random + pwdMd5)
 const handleLogin = () => {
   ruleFormRef.value.validate((valid) => {
     if (valid) {
-      alert('submit!')
+      // alert('submit!')
+      // console.log(form.value.account, random, sign)
+      loginService.login(form.value.account, random, sign).then((res) => {
+        console.log(res)
+      })
     } else {
       console.log('error submit!!')
       return false
     }
   })
 }
+// onMounted(async () => {
+//   await enterLogin()
+// })
+
+// const enterLogin = () => {
+//   console.log(222)
+//   document.onkeydown = (e) => {
+//     e = window.event || e
+//     if ($route.path == '/login' && (e.code == 'Enter' || e.code == 'enter')) {
+//       login()
+//     }
+//   }
+// }
 </script>
 
 <style lang="scss" scoped>
+body {
+  height: 100%;
+}
 $bg: #2d3a4b;
 $dark_gray: #889aa4;
 $light_gray: #eee;
