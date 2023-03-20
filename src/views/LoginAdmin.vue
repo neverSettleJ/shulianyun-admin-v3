@@ -8,13 +8,17 @@
         <el-icon :size="20" class="svg-container">
           <user />
         </el-icon>
+				<!-- <svg-icon icon="user" class="svg-container"></svg-icon> -->
+
         <el-input v-model="form.account" />
       </el-form-item>
       <el-form-item prop="password">
         <el-icon :size="20" class="svg-container">
           <edit />
         </el-icon>
-        <el-input v-model="form.password" />
+				<!-- <svg-icon icon="password" class="svg-container"></svg-icon> -->
+        <el-input v-model="form.password" type="password" ></el-input>
+				<svg-icon icon="eye" ></svg-icon>
       </el-form-item>
       <el-button type="primary" class="login-button" @click="handleLogin">登录</el-button>
     </el-form>
@@ -22,11 +26,11 @@
 </template>
 
 <script setup>
-import { ref, reactive, onMounted } from 'vue'
-import { Edit, User } from '@element-plus/icons-vue'
 import loginService from '@/api/login'
+import { Edit, User } from '@element-plus/icons-vue'
 import md5 from 'blueimp-md5'
 import { sha256 } from 'js-sha256'
+import { reactive, ref } from 'vue'
 import VueCookies from 'vue-cookies'
 
 const form = ref({
