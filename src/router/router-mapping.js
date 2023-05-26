@@ -8,9 +8,9 @@ const RouterMapping = {
 	'tydata-business-account': '/merchant/account/accountindex',
 	'tydata-business-pay': '/finance/payment/index',
 	'tydata-finance-order': '/finance/order/index',
-	'system-smsuser': '/sysadmin/smsuser/index',
-	'system-smsrole': '/sysadmin/smsrole/index',
-	'system-authority': '/sysadmin/authority/index'
+	'sly-zuzhi-user': '/sysadmin/smsuser/index',
+	'sly-zuzhi-role': '/sysadmin/smsrole/index',
+	'sly-zuzhi-authority': '/sysadmin/authority/index'
 
 }
 
