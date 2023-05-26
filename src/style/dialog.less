@@ -1,0 +1,145 @@
+.el-dialog {
+  margin-top: 8vh !important;
+  max-height: 750px;
+  min-height: 260px;
+  overflow-y: auto;
+  .el-dialog__header {
+		display: flex;
+    padding: 26px 30px 5px;
+  }
+  .el-dialog__body {
+    padding: 20px 35px;
+    min-height: 130px;
+  }
+  .el-dialog__footer {
+    padding: 10px 30px 26px;
+  }
+  .el-form {
+    //width: 93%;
+    padding-right: 50px;
+  }
+  .el-table {
+    .el-button {
+      padding: 4px 5px;
+    }
+  }
+  .detail-row {
+    display: flex;
+    padding: 0 20px;
+    margin-bottom: 20px;
+
+    .detail-item {
+      flex: 1;
+      display: flex;
+
+      .detail-item-label,
+      .detail-item-value,
+      .detail-item-value span {
+        font-size: 14px;
+      }
+
+      .detail-item-label {
+        min-width: 100px;
+        font-weight: bold;
+        color: #999;
+      }
+
+      .detail-item-value--box {
+        .tip {
+          margin-top: 5px;
+          color: #999;
+        }
+      }
+
+      .detail-item-value,
+      .detail-item-value > div {
+        display: flex;
+        align-items: center;
+        margin-right: 20px;
+        p {
+          margin-right: 20px;
+        }
+        .tip {
+          color: #999;
+        }
+      }
+
+      .detail-item-value.baseline {
+        align-items: baseline;
+      }
+
+      .el-button--text {
+        padding: 0;
+        font-size: 18px;
+      }
+    }
+  }
+
+  .region {
+    margin-bottom: 20px;
+
+    .title {
+      display: flex;
+      margin-bottom: 20px;
+      align-items: center;
+      h3 {
+        margin-bottom: 0px;
+        width: 120px;
+      }
+      .right {
+        flex: 1;
+        .el-button--text {
+          align-items: center;
+          padding: 0;
+          font-size: 16px;
+          display: flex;
+        }
+      }
+    }
+
+    h3 {
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+    .detail-row {
+      margin-bottom: 16px;
+      .detail-item-label,
+      .detail-item-value,
+      .detail-item-value span {
+        font-size: 13px;
+      }
+    }
+  }
+}
+.el-overlay {
+  .el-overlay-message-box {
+    position: relative !important;
+  }
+}
+.el-message-box {
+  margin-top: 15vh !important;
+  vertical-align: top;
+  .el-message-box__title {
+    span {
+      font-size: 18px;
+    }
+  }
+  .el-message-box__message {
+    p,
+    div,
+    span {
+      font-size: 14px;
+    }
+  }
+}
+
+.el-message-box.multiLine {
+  .el-message-box__message {
+    > p {
+      padding-left: 30px;
+      > p {
+        margin-bottom: 10px;
+      }
+    }
+  }
+}
