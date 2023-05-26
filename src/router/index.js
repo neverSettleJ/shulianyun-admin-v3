@@ -1,70 +1,40 @@
+import Home from '@/views/home/home.vue'
+import Layout from '@/views/layout/layout.vue'
 import { createRouter, createWebHashHistory } from 'vue-router'
+import Sysadmin from './sysadmin'
+import Sysmain from './sysmain'
 
 const routes = [
-	// {
-	//   path: '/',
-	//   name: 'home',
-	//   component: layout,
-	//   redirect: '/users',
-	//   children: [
-	//     {
-	//       path: 'users',
-	//       name: 'users',
-	//       component: () => import('@/views/users/index.vue')
-	//     },
-	//     {
-	//       path: 'categories',
-	//       name: 'categories',
-	//       component: () => import('@/views/categories/index.vue')
-	//     },
-	//     {
-	//       path: 'goods',
-	//       name: 'goods',
-	//       component: () => import('@/views/goods/index.vue')
-	//     },
-	//     {
-	//       path: 'orders',
-	//       name: 'orders',
-	//       component: () => import('@/views/orders/index.vue')
-	//     },
-	//     {
-	//       path: 'params',
-	//       name: 'params',
-	//       component: () => import('@/views/params/index.vue')
-	//     },
-	//     {
-	//       path: 'reports',
-	//       name: 'reports',
-	//       component: () => import('@/views/reports/index.vue')
-	//     },
-	//     {
-	//       path: 'rights',
-	//       name: 'rights',
-	//       component: () => import('@/views/rights/index.vue')
-	//     },
-	//     {
-	//       path: 'roles',
-	//       name: 'roles',
-	//       component: () => import('@/views/roles/index.vue')
-	//     }
-	//   ]
-	// },
 	{
 		path: '/',
-		name: 'loginAdmin',
-		// route level code-splitting
-		// this generates a separate chunk (about.[hash].js) for this route
-		// which is lazy-loaded when the route is visited.
-		component: () => import(/* webpackChunkName: "about" */ '../views/LoginAdmin.vue')
+		// name: 'Layout',
+		component: Layout,
+		meta: {
+			requireAuth: true
+		},
+		redirect: '/home',
+		children: [
+			{
+				path: 'home',
+				component: Home,
+				meta: {
+					title: '首页',
+					requireAuth: true
+				}
+			},
+			Sysmain,
+			Sysadmin
+		]
 	},
 	{
 		path: '/login',
-		name: 'loginAdmin',
+		name: 'login',
 		// route level code-splitting
 		// this generates a separate chunk (about.[hash].js) for this route
 		// which is lazy-loaded when the route is visited.
-		component: () => import(/* webpackChunkName: "about" */ '../views/LoginAdmin.vue')
-	},
+		component: () =>
+			import(/* webpackChunkName: "about" */ '@/views/login/login')
+	}
 ]
 
 const router = createRouter({
