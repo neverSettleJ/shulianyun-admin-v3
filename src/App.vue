@@ -1,38 +1,45 @@
 <template>
-
-  <router-view />
+	<router-view />
 </template>
-
 <script>
-// import { useRoute } from 'vue-router'
-import { ref } from 'vue'
-export default {
-  name: 'App',
-  // components: {
-  // },
-
-  setup() {
-    const sum = ref(0)
-    // const router = useRoute()
-    // const linkto = () => {
-    //   let result = '/login'
-    //   router.replace(result)
-    // }
-
-    return {
-      sum
-    }
-  }
+const debounce = (fn, delay) => {
+	let timer = null
+	return function () {
+		const context = this
+		const args = arguments
+		clearTimeout(timer)
+		timer = setTimeout(function () {
+			fn.apply(context, args)
+		}, delay)
+	}
+}
+const _ResizeObserver = window.ResizeObserver
+window.ResizeObserver = class ResizeObserver extends _ResizeObserver {
+	constructor(callback) {
+		callback = debounce(callback, 16)
+		super(callback)
+	}
 }
 </script>
-
-<style>
+<style lang="less">
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  /* margin-top: 60px; */
+	font-family: Avenir, Helvetica, Arial, sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-align: center;
+	color: #2c3e50;
+}
+
+nav {
+	padding: 30px;
+
+	a {
+		font-weight: bold;
+		color: #2c3e50;
+
+		&.router-link-exact-active {
+			color: #42b983;
+		}
+	}
 }
 </style>
